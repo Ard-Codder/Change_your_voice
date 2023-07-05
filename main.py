@@ -30,9 +30,31 @@ def preprocess_data(data_path):
 
 # Функция для загрузки аудиозаписей и текстовых данных
 def load_data(data_path):
-    # Загрузка аудиозаписей и текстовых данных из набора данных
-    # Возврат аудиозаписей (audio_data) и текстовых данных (text_data)
-    pass
+    audio_data_path = os.path.join(data_path, "audio")  # Путь к папке с аудиозаписями
+    text_data_path = os.path.join(data_path, "text")  # Путь к папке с текстовыми данными
+
+    audio_data = load_audio_data(audio_data_path)  # Загрузка аудиозаписей
+    text_data = load_text_data(text_data_path)  # Загрузка текстовых данных
+
+    return audio_data, text_data
+
+
+def load_audio_data(audio_data_path):
+    # Загрузка аудиозаписей из папки audio_data_path и возврат списка аудиофайлов
+    audio_files = []
+    for file in os.listdir(audio_data_path):
+        if file.endswith(".mp3") or file.endswith(".wav"):
+            audio_files.append(os.path.join(audio_data_path, file))
+    return audio_files
+
+
+def load_text_data(text_data_path):
+    # Загрузка текстовых данных из папки text_data_path и возврат списка текстовых файлов
+    text_files = []
+    for file in os.listdir(text_data_path):
+        if file.endswith(".txt"):
+            text_files.append(os.path.join(text_data_path, file))
+    return text_files
 
 
 # Функция для создания спектрограммы из аудиозаписи
